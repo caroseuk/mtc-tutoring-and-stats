@@ -59,18 +59,18 @@ export function render(el, { store, navigate }) {
         <div class="card"><div class="big">${checks.length ? checks.slice(-1)[0].score + '/25' : '–'}</div><div class="lbl">Latest score</div></div>
         <div class="card"><div class="big">${recentAvg != null ? formatSeconds(recentAvg) : '–'}</div><div class="lbl">Avg answer time (last 3 checks)</div></div>
         <div class="card"><div class="big">${sessions.length}</div><div class="lbl">Rounds played</div></div>
-        <div class="card"><div class="big">${sum.fluent}/${sum.totalFacts}</div><div class="lbl">Fluent facts</div></div>
+        <div class="card"><div class="big">${sum.fluent}/${sum.totalFacts}</div><div class="lbl">Fluent questions</div></div>
       </div>
       <div class="card stack" style="margin-top:14px">
         <h3>Real Check scores</h3>
         ${checks.length >= 2 ? scoreChart(checks) : '<p class="muted">Two or more checks are needed for a chart.</p>'}
       </div>
       <div class="card stack" style="margin-top:14px">
-        <h3>Facts (${rows.length}${showAll ? '' : ' seen'})</h3>
-        <p class="muted" style="margin:0">Fluency blends accuracy (60%) and speed (40%). Under 2.5s is full speed marks, 6s or a timeout is zero. Aim for fluent facts to be answered in under 3 seconds, leaving time to type on the day.</p>
-        <label class="toggle"><span>Show all 121 facts</span><input type="checkbox" data-showall ${showAll ? 'checked' : ''}></label>
+        <h3>Questions (${rows.length}${showAll ? '' : ' seen'})</h3>
+        <p class="muted" style="margin:0">Fluency blends accuracy (60%) and speed (40%). Under 2.5s is full speed marks, 6s or a timeout is zero. Aim for questions to be answered in under 3 seconds, leaving time to type on the day.</p>
+        <label class="toggle"><span>Show all 121 questions</span><input type="checkbox" data-showall ${showAll ? 'checked' : ''}></label>
         <div class="scroll-x"><table class="data">
-          <thead><tr>${th('fact', 'Fact')}${th('status', 'Status')}${th('fluency', 'Fluency', true)}${th('ms', 'Avg time', true)}${th('acc', 'Accuracy', true)}${th('n', 'Tries', true)}</tr></thead>
+          <thead><tr>${th('fact', 'Question')}${th('status', 'Status')}${th('fluency', 'Fluency', true)}${th('ms', 'Avg time', true)}${th('acc', 'Accuracy', true)}${th('n', 'Tries', true)}</tr></thead>
           <tbody>${rows.map((r) => `<tr>
             <td><b>${r.a} × ${r.b}</b> = ${r.a * r.b}</td>
             <td><span class="status-dot" style="background:${STATUS_COLOUR[r.status]}"></span>${STATUS_LABEL[r.status]}${r.derived ? ' <small class="muted">(from reverse)</small>' : ''}</td>

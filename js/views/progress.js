@@ -50,10 +50,10 @@ export function render(el, { store, profile, navigate }) {
       <div class="card"><div class="big" style="color:var(--muted)">${sum.unknown}</div><div class="lbl">Not tried</div></div>
     </div>
     <div class="card stack">
-      <h2>Fact map</h2>
+      <h2>Times tables map</h2>
       <div class="legend"><span><i class="s-fluent"></i>Fluent</span><span><i class="s-nearly"></i>Nearly</span><span><i class="s-learning"></i>Learning</span><span><i class="s-unknown"></i>Not tried</span></div>
       ${heatmap(facts)}
-      <div class="cell-detail muted" data-detail>Tap a square to see how you're doing with that fact</div>
+      <div class="cell-detail muted" data-detail>Tap a square to see how you're doing with that question</div>
     </div>
     <div class="card stack" style="margin-top:14px">
       <h2>Times tables</h2>

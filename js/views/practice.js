@@ -15,7 +15,7 @@ export function render(el, { store, profile, navigate, audio, announce, shared, 
     <div class="card stack" style="margin:auto; max-width:520px; text-align:center">
       <h1>${table ? `🔢 The ${table}s` : '🎯 Practice'}</h1>
       <p>${table
-        ? `${ts.fluent} of ${ts.total} facts in the ${table} times table are fluent.`
+        ? `${ts.fluent} of ${ts.total} questions in the ${table} times table are fluent.`
         : 'Questions picked just for you: the ones you find tricky, plus a few you know.'}</p>
       <p class="muted">You get ${SECONDS_PER_QUESTION} seconds each and see the answer straight away.</p>
       <div class="row center" data-count>
