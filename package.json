@@ -1,0 +1,11 @@
+{
+  "name": "mtc-tutoring-and-stats",
+  "version": "1.0.0",
+  "description": "Multiplication Tables Check practice app for Year 4 children",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "serve": "python3 -m http.server 8000"
+  }
+}
