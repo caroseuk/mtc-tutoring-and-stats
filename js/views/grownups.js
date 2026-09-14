@@ -111,7 +111,7 @@ export function render(el, { store, navigate }) {
           <button type="button" class="btn small ghost" data-act="delete">Delete ${esc(p.name)}</button>
         </div>
       </div>` : ''}
-      <div class="footer-links"><small class="muted">Tables Rocket · practice for the Year 4 Multiplication Tables Check</small></div>`;
+      <div class="footer-links"><small class="muted">Beat Six · practice for the Year 4 Multiplication Tables Check</small></div>`;
   }
   draw();
 
@@ -152,7 +152,7 @@ export function render(el, { store, navigate }) {
     const blob = new Blob([store.exportJSON()], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `tables-rocket-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `beat-six-backup-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);

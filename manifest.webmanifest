@@ -1,7 +1,7 @@
 {
-  "name": "Tables Rocket",
-  "short_name": "Tables",
-  "description": "Practise for the Year 4 Multiplication Tables Check",
+  "name": "Beat Six",
+  "short_name": "Beat Six",
+  "description": "Beat the six-second timer: practice for the Year 4 Multiplication Tables Check",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +9,8 @@
   "background_color": "#f3f0ff",
   "theme_color": "#7c4dff",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

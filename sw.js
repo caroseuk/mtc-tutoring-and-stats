@@ -1,10 +1,10 @@
 // Network-first service worker: always fresh when online, still works offline.
-const CACHE = 'tables-rocket-v1';
+const CACHE = 'beat-six-v2';
 const SHELL = [
   './', './index.html', './css/style.css', './manifest.webmanifest',
   './js/app.js', './js/store.js', './js/mtc.js', './js/adaptive.js', './js/session.js', './js/rewards.js', './js/audio.js', './js/util.js',
   './js/views/profiles.js', './js/views/home.js', './js/views/check.js', './js/views/practice.js', './js/views/results.js', './js/views/progress.js', './js/views/grownups.js',
-  './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png',
+  './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-512-maskable.png', './icons/favicon-32.png', './icons/logo.svg',
 ];
 
 self.addEventListener('install', (e) => {

@@ -1,6 +1,6 @@
-# Tables Rocket 🚀
+# Beat Six
 
-A practice app for the Year 4 **Multiplication Tables Check (MTC)**, the statutory check taken in England each June. Built for children to use on an iPad (or any browser), with progress tracking and practice that adapts to what each child finds hard.
+Live at [beatsix.com](https://beatsix.com). A practice app for the Year 4 **Multiplication Tables Check (MTC)**, the statutory check taken in England each June. Built for children to use on an iPad (or any browser), with progress tracking and practice that adapts to what each child finds hard.
 
 Plain HTML, CSS and JavaScript. No framework, no build step, no backend, no accounts. Progress is stored in the browser, with a backup file you can export and import.
 

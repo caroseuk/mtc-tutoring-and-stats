@@ -8,7 +8,7 @@ export function render(el, { store, navigate }) {
 
   function draw() {
     el.innerHTML = `
-      <div class="hero"><h1>Who's playing? 🚀</h1><p class="muted">Tap your name to start</p></div>
+      <div class="hero"><img class="logo" src="icons/logo.svg" alt=""><div class="brand">Beat Six</div><h1>Who's playing?</h1><p class="muted">Tap your name to start</p></div>
       <div class="profile-grid">
         ${store.profiles().map((p) => `
           <button type="button" class="profile-tile" data-id="${p.id}" style="--pc:${esc(p.colour)}33">
