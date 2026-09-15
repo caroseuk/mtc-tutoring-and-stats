@@ -27,11 +27,13 @@ export function render(el, { store, navigate }) {
         </div>
         <div class="row"><button type="submit" class="btn good">Let's go! 🎉</button>${store.profiles().length ? '<button type="button" class="btn ghost" data-act="cancel">Cancel</button>' : ''}</div>
       </form>
-      <div class="footer-links"><a href="#grownups">Grown-ups</a></div>`;
+      <div class="footer-links"><button type="button" class="btn ghost small" data-go="#grownups">🔒 Grown-ups</button></div>`;
   }
   draw();
 
   el.addEventListener('click', (e) => {
+    const go = e.target.closest('[data-go]');
+    if (go) { navigate(go.dataset.go); return; }
     const tile = e.target.closest('.profile-tile[data-id]');
     if (tile) { store.setActive(tile.dataset.id); navigate('#home'); return; }
     const act = e.target.closest('[data-act]')?.dataset.act;

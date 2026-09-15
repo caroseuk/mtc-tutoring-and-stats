@@ -36,7 +36,7 @@ export function render(el, { store, profile, navigate }) {
       <div class="card"><div class="big">${sum.exploredPairs}<small style="font-size:1rem">/${sum.totalPairs}</small></div><div class="lbl">Questions tried</div></div>
       <div class="card"><div class="big">${sum.fluent}</div><div class="lbl">Fluent questions</div></div>
     </div>
-    <div class="footer-links"><a href="#grownups">Grown-ups</a></div>`;
+    <div class="footer-links"><button type="button" class="btn ghost small" data-go="#grownups">🔒 Grown-ups</button></div>`;
 
   el.addEventListener('click', (e) => {
     const go = e.target.closest('[data-go]');
