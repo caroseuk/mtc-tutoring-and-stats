@@ -1,4 +1,4 @@
-// Adaptive practice round, and "pick a table" rounds (route #table/N).
+// Adaptive practice round, and single times table rounds (route #table/N).
 import { selectTraining, tableSummary } from '../adaptive.js';
 import { SECONDS_PER_QUESTION, PAUSE_SECONDS, TABLES } from '../mtc.js';
 import { runSession } from '../session.js';

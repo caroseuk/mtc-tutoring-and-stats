@@ -17,22 +17,22 @@ export function render(el, { store, profile, navigate }) {
       <div class="row"><span class="stat">⭐ ${rewards.stars}</span><span class="stat">🔥 ${rewards.streak}</span></div>
     </div>
     <div class="hero"><h1>Hi ${esc(profile.name)}! 👋</h1><p class="muted">${checks === 0 ? 'Ready for lift off?' : 'What shall we do today?'}</p></div>
-    ${checks === 0 ? '<div class="nudge">🚀 Start with a <b>Real Check</b> to find your starting score</div>' : ''}
+    ${checks === 0 ? '<div class="nudge">🚀 Start with a <b>Test Simulation</b> to find your starting score</div>' : ''}
     <div class="mode-grid">
-      <button type="button" class="mode check ${checks === 0 ? 'highlight' : ''}" data-go="#check"><span class="ico">📝</span>Real Check<small>25 questions · 6 seconds each</small></button>
+      <button type="button" class="mode check ${checks === 0 ? 'highlight' : ''}" data-go="#check"><span class="ico">📝</span>Test Simulation<small>25 questions · 6 seconds each</small></button>
       <button type="button" class="mode practice" data-go="#practice"><span class="ico">🎯</span>Practice<small>${perRound} questions picked for you</small></button>
-      <button type="button" class="mode table" data-act="tables"><span class="ico">🔢</span>Pick a table<small>Practise one times table</small></button>
+      <button type="button" class="mode table" data-act="tables"><span class="ico">🔢</span>Times tables<small>Choose one to work on</small></button>
       <button type="button" class="mode progress" data-go="#progress"><span class="ico">🗺️</span>My progress<small>Times tables map & badges</small></button>
     </div>
     <div class="card" data-tables hidden>
-      <h2>Which table?</h2>
+      <h2>Which times table?</h2>
       <div class="table-picker">
         ${TABLES.map((t) => { const s = tableSummary(facts, t); return `<button type="button" data-go="#table/${t}">${t}s<span class="bar"><i style="width:${Math.round(100 * s.fluent / s.total)}%"></i></span></button>`; }).join('')}
       </div>
     </div>
     <div class="summary">
-      <div class="card"><div class="big">${last ? `${last.score}<small style="font-size:1rem">/25</small>` : '–'}</div><div class="lbl">Last check</div></div>
-      <div class="card"><div class="big">${checks ? `${best}<small style="font-size:1rem">/25</small>` : '–'}</div><div class="lbl">Best check</div></div>
+      <div class="card"><div class="big">${last ? `${last.score}<small style="font-size:1rem">/25</small>` : '–'}</div><div class="lbl">Last test</div></div>
+      <div class="card"><div class="big">${checks ? `${best}<small style="font-size:1rem">/25</small>` : '–'}</div><div class="lbl">Best test</div></div>
       <div class="card"><div class="big">${sum.exploredPairs}<small style="font-size:1rem">/${sum.totalPairs}</small></div><div class="lbl">Questions tried</div></div>
       <div class="card"><div class="big">${sum.fluent}</div><div class="lbl">Fluent questions</div></div>
     </div>

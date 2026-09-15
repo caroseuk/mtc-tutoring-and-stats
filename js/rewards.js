@@ -17,15 +17,15 @@ const TABLE_BADGES = TABLES.map((t) => ({
 }));
 
 export const BADGES = [
-  { id: 'first-check', emoji: '🚀', name: 'Lift off', description: 'Finished your first Real Check', test: ({ sessions }) => sessions.some((s) => s.type === 'check') },
+  { id: 'first-check', emoji: '🚀', name: 'Lift off', description: 'Finished your first Test Simulation', test: ({ sessions }) => sessions.some((s) => s.type === 'check') },
   { id: 'first-practice', emoji: '🎯', name: 'Warmed up', description: 'Finished your first practice round', test: ({ sessions }) => sessions.some((s) => s.type !== 'check') },
   { id: 'map-half', emoji: '🗺️', name: 'Explorer', description: 'Tried half of all the questions', test: ({ summary }) => summary.exploredPairs >= summary.totalPairs / 2 },
   { id: 'map-full', emoji: '🧭', name: 'Map complete', description: 'Tried every single question', test: ({ summary }) => summary.exploredPairs >= summary.totalPairs },
-  { id: 'score-20', emoji: '⭐', name: 'Twenty club', description: 'Scored 20 or more in a Real Check', test: ({ session }) => session.type === 'check' && session.score >= 20 },
-  { id: 'score-25', emoji: '🏆', name: 'Perfect 25', description: 'Full marks in a Real Check', test: ({ session }) => session.type === 'check' && session.score === 25 },
-  { id: 'speedster', emoji: '⚡', name: 'Speedster', description: 'Averaged under 3 seconds in a Real Check with 20+', test: ({ session }) => session.type === 'check' && session.score >= 20 && session.avgMs != null && session.avgMs < 3000 },
-  { id: 'streak-3', emoji: '🔥', name: 'On fire', description: 'Practised 3 days in a row', test: ({ rewards }) => rewards.streak >= 3 },
-  { id: 'streak-7', emoji: '🌋', name: 'Unstoppable', description: 'Practised 7 days in a row', test: ({ rewards }) => rewards.streak >= 7 },
+  { id: 'score-20', emoji: '⭐', name: 'Twenty club', description: 'Scored 20 or more in a Test Simulation', test: ({ session }) => session.type === 'check' && session.score >= 20 },
+  { id: 'score-25', emoji: '🏆', name: 'Perfect 25', description: 'Full marks in a Test Simulation', test: ({ session }) => session.type === 'check' && session.score === 25 },
+  { id: 'speedster', emoji: '⚡', name: 'Speedster', description: 'Averaged under 3 seconds in a Test Simulation with 20+', test: ({ session }) => session.type === 'check' && session.score >= 20 && session.avgMs != null && session.avgMs < 3000 },
+  { id: 'streak-3', emoji: '🔥', name: 'On fire', description: 'Played 3 days in a row', test: ({ rewards }) => rewards.streak >= 3 },
+  { id: 'streak-7', emoji: '🌋', name: 'Unstoppable', description: 'Played 7 days in a row', test: ({ rewards }) => rewards.streak >= 7 },
   { id: 'sessions-10', emoji: '💪', name: 'Ten rounds', description: 'Finished 10 rounds', test: ({ sessions }) => sessions.length >= 10 },
   { id: 'sessions-25', emoji: '🦁', name: 'Twenty-five rounds', description: 'Finished 25 rounds', test: ({ sessions }) => sessions.length >= 25 },
   { id: 'stars-50', emoji: '🌟', name: 'Star collector', description: 'Collected 50 stars', test: ({ rewards }) => rewards.stars >= 50 },

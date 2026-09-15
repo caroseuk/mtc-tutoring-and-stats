@@ -54,16 +54,16 @@ export function render(el, { store, navigate }) {
       </div>
       ${p ? `
       <div class="summary" style="margin-top:14px">
-        <div class="card"><div class="big">${checks.length}</div><div class="lbl">Real Checks</div></div>
+        <div class="card"><div class="big">${checks.length}</div><div class="lbl">Test Simulations</div></div>
         <div class="card"><div class="big">${checks.length ? store.bestCheck(p.id) + '/25' : '–'}</div><div class="lbl">Best score</div></div>
         <div class="card"><div class="big">${checks.length ? checks.slice(-1)[0].score + '/25' : '–'}</div><div class="lbl">Latest score</div></div>
-        <div class="card"><div class="big">${recentAvg != null ? formatSeconds(recentAvg) : '–'}</div><div class="lbl">Avg answer time (last 3 checks)</div></div>
+        <div class="card"><div class="big">${recentAvg != null ? formatSeconds(recentAvg) : '–'}</div><div class="lbl">Avg answer time (last 3 tests)</div></div>
         <div class="card"><div class="big">${sessions.length}</div><div class="lbl">Rounds played</div></div>
         <div class="card"><div class="big">${sum.fluent}/${sum.totalFacts}</div><div class="lbl">Fluent questions</div></div>
       </div>
       <div class="card stack" style="margin-top:14px">
-        <h3>Real Check scores</h3>
-        ${checks.length >= 2 ? scoreChart(checks) : '<p class="muted">Two or more checks are needed for a chart.</p>'}
+        <h3>Test Simulation scores</h3>
+        ${checks.length >= 2 ? scoreChart(checks) : '<p class="muted">Two or more tests are needed for a chart.</p>'}
       </div>
       <div class="card stack" style="margin-top:14px">
         <h3>Questions (${rows.length}${showAll ? '' : ' seen'})</h3>
@@ -84,7 +84,7 @@ export function render(el, { store, navigate }) {
         <details><summary>Round history (${sessions.length})</summary>
           <div class="scroll-x"><table class="data">
             <thead><tr><th>When</th><th>Type</th><th class="num">Score</th><th class="num">Avg time</th></tr></thead>
-            <tbody>${sessions.slice().reverse().slice(0, 100).map((s) => `<tr><td>${formatDateTime(s.endedAt)}</td><td>${s.type === 'check' ? 'Real Check' : s.type === 'table' ? `${s.table}s` : 'Practice'}</td><td class="num">${s.score}/${s.total}</td><td class="num">${s.avgMs == null ? '–' : formatSeconds(s.avgMs)}</td></tr>`).join('')}</tbody>
+            <tbody>${sessions.slice().reverse().slice(0, 100).map((s) => `<tr><td>${formatDateTime(s.endedAt)}</td><td>${s.type === 'check' ? 'Test Simulation' : s.type === 'table' ? `${s.table}s` : 'Practice'}</td><td class="num">${s.score}/${s.total}</td><td class="num">${s.avgMs == null ? '–' : formatSeconds(s.avgMs)}</td></tr>`).join('')}</tbody>
           </table></div>
         </details>
       </div>

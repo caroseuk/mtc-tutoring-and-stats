@@ -14,7 +14,7 @@ export function scoreChart(checks, { max = 25 } = {}) {
   const line = pts.map((s, i) => `${x(i).toFixed(1)},${y(s.score).toFixed(1)}`).join(' ');
   const grid = [0, 5, 10, 15, 20, 25].map((v) => `<line x1="${padL}" x2="${W - padR}" y1="${y(v)}" y2="${y(v)}" stroke="#e9e6f7"/><text x="${padL - 6}" y="${y(v) + 4}" font-size="11" text-anchor="end" fill="#6d6a8a">${v}</text>`).join('');
   const dots = pts.map((s, i) => `<circle cx="${x(i)}" cy="${y(s.score)}" r="5" fill="#7c4dff"/><text x="${x(i)}" y="${H - 8}" font-size="10" text-anchor="middle" fill="#6d6a8a">${formatDate(s.endedAt)}</text>`).join('');
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Real Check scores over time">${grid}<polyline points="${line}" fill="none" stroke="#7c4dff" stroke-width="3" stroke-linejoin="round"/>${dots}</svg>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Test Simulation scores over time">${grid}<polyline points="${line}" fill="none" stroke="#7c4dff" stroke-width="3" stroke-linejoin="round"/>${dots}</svg>`;
 }
 
 export function heatmap(facts) {
@@ -62,9 +62,9 @@ export function render(el, { store, profile, navigate }) {
       </div>
     </div>
     <div class="card stack" style="margin-top:14px">
-      <h2>Real Check scores</h2>
-      ${checks.length >= 2 ? scoreChart(checks) : `<p class="muted">${checks.length === 1 ? `First check: ${checks[0].score}/25. Do another to see your line go up!` : 'Do a Real Check to start your chart.'}</p>`}
-      ${checks.length ? `<div class="row"><span class="chip plain">Best ${store.bestCheck(profile.id)}/25</span><span class="chip plain">Latest ${checks.slice(-1)[0].score}/25</span><span class="chip plain">${checks.length} check${checks.length > 1 ? 's' : ''}</span></div>` : ''}
+      <h2>Test Simulation scores</h2>
+      ${checks.length >= 2 ? scoreChart(checks) : `<p class="muted">${checks.length === 1 ? `First test: ${checks[0].score}/25. Do another to see your line go up!` : 'Do a Test Simulation to start your chart.'}</p>`}
+      ${checks.length ? `<div class="row"><span class="chip plain">Best ${store.bestCheck(profile.id)}/25</span><span class="chip plain">Latest ${checks.slice(-1)[0].score}/25</span><span class="chip plain">${checks.length} test${checks.length > 1 ? 's' : ''}</span></div>` : ''}
     </div>
     <div class="card stack" style="margin-top:14px">
       <h2>Badges (${rewards.badges.length}/${BADGES.length})</h2>
@@ -72,7 +72,7 @@ export function render(el, { store, profile, navigate }) {
         ${BADGES.map((b) => `<div class="badge ${rewards.badges.includes(b.id) ? '' : 'locked'}" title="${esc(b.description)}"><span class="e">${b.emoji}</span>${esc(b.name)}</div>`).join('')}
       </div>
     </div>
-    <div class="row center" style="margin-top:18px"><button type="button" class="btn good" data-go="#practice">Practise 🎯</button></div>`;
+    <div class="row center" style="margin-top:18px"><button type="button" class="btn good" data-go="#practice">Practice 🎯</button></div>`;
 
   el.addEventListener('click', (e) => {
     const go = e.target.closest('[data-go]');

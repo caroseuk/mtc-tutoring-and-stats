@@ -1,4 +1,4 @@
-// The Real Check: an official-style replica of the MTC.
+// The Test Simulation: an official-style replica of the MTC.
 import { generateCheck, generateWarmup, SECONDS_PER_QUESTION, PAUSE_SECONDS, TOTAL } from '../mtc.js';
 import { runSession } from '../session.js';
 
@@ -6,7 +6,7 @@ export function render(el, { store, profile, navigate, audio, announce, shared }
   let session = null;
   el.innerHTML = `
     <div class="card stack" style="margin:auto; max-width:520px; text-align:center">
-      <h1>📝 Real Check</h1>
+      <h1>📝 Test Simulation</h1>
       <p>This is just like the real thing:</p>
       <ul style="text-align:left; margin:0 auto; max-width:360px; font-weight:800">
         <li>3 practice questions first</li>

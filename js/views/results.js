@@ -6,7 +6,7 @@ const MESSAGES = [
   [1.0, '🏆 Perfect! Amazing!'],
   [0.9, '🌟 Brilliant work!'],
   [0.8, '🎉 Great job!'],
-  [0.6, '💪 Good going, keep practising!'],
+  [0.6, '💪 Good going, keep it up!'],
   [0.4, "👍 Nice try, you're learning!"],
   [0, '🌱 Every go makes you stronger!'],
 ];
@@ -46,7 +46,7 @@ export function render(el, { store, profile, navigate, shared, params }) {
 
   el.innerHTML = `
     <div class="card score-hero">
-      <div class="muted" style="font-weight:800">${isCheck ? 'Real Check' : session.type === 'table' ? `The ${session.table}s` : 'Practice round'}</div>
+      <div class="muted" style="font-weight:800">${isCheck ? 'Test Simulation' : session.type === 'table' ? `The ${session.table}s` : 'Practice round'}</div>
       <div class="score">${session.score}<small> / ${session.total}</small></div>
       <div class="msg">${msg}</div>
       ${newBest ? '<div class="chip warn" style="margin-top:8px">🥇 New personal best!</div>' : ''}
@@ -67,7 +67,7 @@ export function render(el, { store, profile, navigate, shared, params }) {
     </div>
     ${weak.length ? `<div class="card" style="margin-top:14px"><h3>Questions to work on</h3><div class="qgrid">${weak.map((w) => `<span class="chip warn">${w.a} × ${w.b} = ${w.a * w.b}</span>`).join('')}</div></div>` : ''}
     <div class="row center" style="margin-top:18px">
-      <button type="button" class="btn good" data-go="${isCheck ? '#practice' : `#${session.type === 'table' ? `table/${session.table}` : 'practice'}`}">${isCheck ? 'Practise the tricky ones 🎯' : 'Play again 🔁'}</button>
+      <button type="button" class="btn good" data-go="${isCheck ? '#practice' : `#${session.type === 'table' ? `table/${session.table}` : 'practice'}`}">${isCheck ? 'Work on the tricky ones 🎯' : 'Play again 🔁'}</button>
       <button type="button" class="btn ghost" data-go="#home">Home 🏠</button>
     </div>`;
 

@@ -140,7 +140,7 @@ export function runSession(container, opts) {
     }
     el.fill.style.transform = 'scaleX(0)';
     if (o.feedback) showFeedback(rec);
-    else el.qArea.classList.add('blank'); // the real check goes blank between questions
+    else el.qArea.classList.add('blank'); // the real test goes blank between questions
     index++;
     timer = setTimeout(showQuestion, o.pause * 1000);
   }
