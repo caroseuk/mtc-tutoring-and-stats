@@ -138,3 +138,46 @@ test('weakest returns the lowest-fluency seen facts first', () => {
   assert.ok(w.includes('6x7'));
   assert.ok(!w.includes('2x2'));
 });
+
+test('two fast correct answers in each orientation make the pair fluent', () => {
+  const facts = {};
+  drill(facts, '7x8', [[true, 1300], [true, 1300]]);
+  assert.equal(effective(facts, '7x8').status, 'nearly');
+  drill(facts, '8x7', [[true, 1300], [true, 1300]]);
+  assert.equal(effective(facts, '7x8').status, 'fluent');
+  assert.equal(effective(facts, '8x7').status, 'fluent');
+  // a slow reverse is not strong enough evidence
+  const slow = {};
+  drill(slow, '6x9', [[true, 1300], [true, 1300]]);
+  drill(slow, '9x6', [[true, 5500], [true, 5500]]);
+  assert.equal(effective(slow, '6x9').status, 'nearly');
+});
+
+test('a fact answered correctly twice keeps a real priority so it gets confirmed', () => {
+  const facts = {};
+  drill(facts, '7x8', [[true, 1300], [true, 1300]]);
+  drill(facts, '3x4', [[true, 1300], [true, 1300], [true, 1300]], NOW - 30 * DAY_MS); // fluent and due
+  drill(facts, '2x2', [[true, 1300], [true, 1300], [true, 1300]], NOW);               // fluent, not due
+  const twice = priority(facts, '7x8', NOW);
+  assert.ok(twice > 0.5, `priority was ${twice}`);
+  assert.ok(twice > priority(facts, '3x4', NOW));
+  assert.ok(priority(facts, '3x4', NOW) > priority(facts, '2x2', NOW));
+});
+
+test('a child who answers everything fast and right turns the whole map green within 24 rounds', () => {
+  const rng = seededRandom(1);
+  const facts = {};
+  let now = NOW;
+  const answer = (key) => { facts[key] = updateFact(facts[key], { correct: true, ms: 1300, at: now }); };
+  for (const key of ['7x8', '6x9', '12x11', '3x4', '9x9']) answer(key);
+  const fluentAt = [];
+  for (let r = 1; r <= 24; r++) {
+    now += 5 * 60 * 1000;
+    for (const q of selectTraining(facts, 15, { now, rng })) answer(q.key);
+    fluentAt.push(summarize(facts).fluent);
+  }
+  assert.ok(fluentAt[11] >= 40, `only ${fluentAt[11]} fluent after 12 rounds`);
+  assert.equal(fluentAt[23], FACT_KEYS.length, `only ${fluentAt[23]} fluent after 24 rounds`);
+  const maxAttempts = Math.max(...FACT_KEYS.map((k) => facts[k]?.n || 0));
+  assert.ok(maxAttempts <= 10, `a fact was asked ${maxAttempts} times`);
+});

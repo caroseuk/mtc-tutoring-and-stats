@@ -1,7 +1,7 @@
 // Persistence: profiles, facts, sessions and rewards in localStorage (or any
 // getItem/setItem/removeItem object, so tests can use an in-memory one).
 
-import { updateFact, status, factKey } from './adaptive.js';
+import { updateFact, summarize, factKey } from './adaptive.js';
 import { applySession, newRewards } from './rewards.js';
 import { uid, mean } from './util.js';
 
@@ -111,13 +111,12 @@ export function createStore(storage = globalThis.localStorage || memoryStorage()
     recordSession(profileId, { type, startedAt, secondsPerQuestion = 6, questions, table = null }, now = Date.now()) {
       if (!api.profile(profileId)) throw new Error('Unknown profile');
       const facts = state.facts[profileId] ||= {};
-      let newlyFluent = 0;
+      const fluentBefore = summarize(facts).fluent;
       for (const q of questions) {
         const key = factKey(q.a, q.b);
-        const before = status(facts[key]);
         facts[key] = updateFact(facts[key], { correct: q.correct, ms: q.ms, at: now });
-        if (before !== 'fluent' && status(facts[key]) === 'fluent') newlyFluent++;
       }
+      const newlyFluent = Math.max(0, summarize(facts).fluent - fluentBefore);
       const scored = questions.filter((q) => !q.retry);
       const session = {
         id: uid('s_'), type, table, startedAt, endedAt: now, secondsPerQuestion,

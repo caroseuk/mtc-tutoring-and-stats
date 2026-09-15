@@ -59,10 +59,18 @@ export function fluency(fact) {
   return 0.6 * fact.ewmaAcc + 0.4 * speedScore(fact.ewmaMs);
 }
 
-export function status(fact) {
+/**
+ * Status of one fact. Fluent needs a high score plus enough evidence: three
+ * correct answers in a row, or two here plus two in the reversed fact
+ * (7x8 and 8x7 both answered quickly and correctly twice is good evidence).
+ */
+export function status(fact, reverse = null) {
   const fl = fluency(fact);
   if (fl == null) return 'unknown';
-  if (fl >= FLUENT_AT && fact.n >= 3 && fact.last3.length === 3 && fact.last3.every(Boolean)) return 'fluent';
+  const allRight = fact.last3.every(Boolean);
+  const confirmed = fact.n >= 3 && fact.last3.length === 3;
+  const reverseStrong = !!reverse && reverse.n >= 2 && reverse.last3.every(Boolean) && (fluency(reverse) ?? 0) >= FLUENT_AT;
+  if (fl >= FLUENT_AT && allRight && (confirmed || (fact.n === 2 && reverseStrong))) return 'fluent';
   if (fl >= NEARLY_AT) return 'nearly';
   return 'learning';
 }
@@ -74,8 +82,8 @@ export function status(fact) {
  */
 export function effective(facts, key) {
   const f = facts[key];
-  if (f && f.n >= MIN_ATTEMPTS) return { fluency: fluency(f), status: status(f), derived: false, fact: f };
   const r = facts[reverseKey(key)];
+  if (f && f.n >= MIN_ATTEMPTS) return { fluency: fluency(f), status: status(f, r), derived: false, fact: f };
   if (r && r.n >= MIN_ATTEMPTS) {
     const fl = fluency(r) * 0.85;
     return { fluency: fl, status: fl >= NEARLY_AT ? 'nearly' : 'learning', derived: true, fact: f || null };
@@ -94,7 +102,12 @@ export function prior(a, b) {
   return clamp(p, 0.15, 1);
 }
 
-/** Higher = more worth asking now. Unseen facts always come first. */
+/**
+ * Higher = more worth asking now. Unseen facts always come first, then facts
+ * only known the other way round, then anything seen but not yet fluent
+ * (weak ones first, and never zero: a fact still needs a third answer to be
+ * confirmed), then fluent facts that are due for review.
+ */
 export function priority(facts, key, now = Date.now()) {
   const { a, b } = parseKey(key);
   const e = effective(facts, key);
@@ -102,8 +115,10 @@ export function priority(facts, key, now = Date.now()) {
   if (e.status === 'unknown') return 2 + pr;
   if (e.derived) return 1.2 + pr * (1 - e.fluency);
   const due = (e.fact?.due ?? 0) <= now;
-  if (e.status === 'fluent') return (due ? 0.4 : 0.1) * (1 + pr * 0.5);
-  return (1 - e.fluency) * (0.5 + pr) * (due ? 1.2 : 1);
+  if (e.status === 'fluent') return due ? 0.5 + 0.2 * pr : 0.05;
+  const weakness = 1 - e.fluency;
+  const confirm = e.fact.n < 3 ? 0.5 : 0;
+  return (0.3 + weakness * (0.5 + pr) + confirm) * (due ? 1.2 : 1);
 }
 
 function sharesFactor(q1, q2) {
